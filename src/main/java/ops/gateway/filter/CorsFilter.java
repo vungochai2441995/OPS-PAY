@@ -1,14 +1,12 @@
 package ops.gateway.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import ops.gateway.response.Response;
+import ops.gateway.response.ResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import com.google.gson.Gson;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -43,21 +41,29 @@ public class CorsFilter implements Filter {
             String requestApiKey = requestWrapper.getHeader("api_key");
             String requestApiSecret = requestWrapper.getHeader("api_secret");
                 if (!requestApiKey.equals("ops-pay-key") || !requestApiSecret.equals("ops-pay-secret")) {
-                    response.setStatus(HttpServletResponse.SC_OK);
-                    response.getOutputStream().write(restResponseBytes(new Response("Sai key connect","401001",HttpStatus.UNAUTHORIZED)));
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getOutputStream().write(restResponseBytes(new ResponseDTO("Sai key connect tại pay-maker-checker","401101")));
                     return;
+
+//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                    ResponseDTO responseDTO = new ResponseDTO("Sai key connect tại pay-maker-checker","401101");
+//                    String json = new ObjectMapper().writeValueAsString(responseDTO);
+//                    response.getWriter().write(json);
+//                    response.flushBuffer();
+//                    return ;
+                }else {
+                    filterChain.doFilter(request, response);
                 }
-                filterChain.doFilter(request, response);
         }catch (RuntimeException e) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getOutputStream().write(restResponseBytes(new Response("Loi server","500",HttpStatus.INTERNAL_SERVER_ERROR)));
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getOutputStream().write(restResponseBytes(new ResponseDTO("Sai key connect tại pay-maker-checker","401101")));
             return;
 
         }
 
     }
 
-    private byte[] restResponseBytes(Response responseDto) throws IOException {
+    private byte[] restResponseBytes(ResponseDTO responseDto) throws IOException {
         String serialized = new ObjectMapper().writeValueAsString(responseDto);
         return serialized.getBytes();
     }
