@@ -1,9 +1,9 @@
 package ops.gateway.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ops.gateway.response.ResponseDTO;
+import ops.gateway.IO.response.ResponseDTO;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -15,6 +15,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
 
 @Component
 public class CorsFilter implements Filter {
@@ -36,25 +37,19 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        ApiKeyVerifiRequestWrapper requestWrapper = new ApiKeyVerifiRequestWrapper(request);
+        Logger logger = LoggerFactory.getLogger(CorsFilter.class);
         try {
-            String requestApiKey = requestWrapper.getHeader("api_key");
-            String requestApiSecret = requestWrapper.getHeader("api_secret");
+            String requestApiKey = request.getHeader("api_key");
+            String requestApiSecret = request.getHeader("api_secret");
                 if (!requestApiKey.equals("ops-pay-key") || !requestApiSecret.equals("ops-pay-secret")) {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.getOutputStream().write(restResponseBytes(new ResponseDTO("Sai key connect tại pay-maker-checker","401101")));
                     return;
-
-//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                    ResponseDTO responseDTO = new ResponseDTO("Sai key connect tại pay-maker-checker","401101");
-//                    String json = new ObjectMapper().writeValueAsString(responseDTO);
-//                    response.getWriter().write(json);
-//                    response.flushBuffer();
-//                    return ;
                 }else {
                     filterChain.doFilter(request, response);
                 }
         }catch (RuntimeException e) {
+            logger.error(e.toString());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getOutputStream().write(restResponseBytes(new ResponseDTO("Sai key connect tại pay-maker-checker","401101")));
             return;

@@ -1,4 +1,4 @@
-package ops.gateway.response;
+package ops.gateway.IO.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,24 +8,24 @@ import lombok.Data;
 @Data
 public class ResponseDTO {
     public ResponseDTO(String message, String code) {
-        this.responseMeta = new ResponseMeta(message,code);
+        this.responseMeta = new Meta(message,code);
     }
 
     public ResponseDTO(String message, String code, String functionName) {
-        this.responseMeta = new ResponseMeta(message,code);
-        this.responseBody = new ResponseBody(functionName);
+        this.responseMeta = new Meta(message,code);
+        this.responseBody = new Body(functionName);
     }
 
     @JsonProperty("meta")
-    private ResponseMeta responseMeta;
+    private Meta responseMeta;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("body")
-    private ResponseBody responseBody;
+    private  Body responseBody;
 
     @Data
     @AllArgsConstructor
-    class ResponseMeta {
+    class Meta {
         @JsonProperty("message")
         private String message;
 
@@ -35,7 +35,7 @@ public class ResponseDTO {
 
     @Data
     @AllArgsConstructor
-    class ResponseBody {
+    class Body {
         @JsonProperty("function_name")
         private String function_name;
     }
