@@ -7,11 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 @Aspect
 public class LogManager {
-
     @Pointcut("execution(* ops.gateway.controller.*.*(..))")
     public void auditLog() {}
-
-    @Pointcut("execution(* ops.gateway.controller.*.*(..))")
-    public void performanceLog(){
-    }
 }
