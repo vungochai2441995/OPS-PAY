@@ -1,4 +1,4 @@
-package ops.gateway.model.response;
+package ops.gateway.model.response.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,7 +1,7 @@
 package ops.gateway.exception;
 
-import ops.gateway.model.response.ResponseConstant;
-import ops.gateway.model.response.ResponseDTO;
+import ops.gateway.model.response.common.ResponseConstant;
+import ops.gateway.model.response.CommonResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,7 +30,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         details = details.stream()
                 .distinct()
                 .collect(Collectors.toList());
-        ResponseDTO error = ResponseConstant.responseError400("Validated Fail",details);
+        CommonResponse error = ResponseConstant.responseError400("Validated Fail",details);
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 

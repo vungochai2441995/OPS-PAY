@@ -20,7 +20,7 @@ public class RequestDTO implements Serializable {
     private static final long serialVersionUID = -7708564395285861220L;
     @NotNull(message = "[session_id] "+ Constant.MessageApi.VALIDATE_NULL)
     @JsonProperty("session_id")
-    private String session_id;
+    private Long session_id;
 
     @NotNull(message = "[file_name] "+ Constant.MessageApi.VALIDATE_NULL)
     @Length(max = 20,message = "[file_name] "+ Constant.MessageApi.VALIDATE_MAX_LENGTH_20)

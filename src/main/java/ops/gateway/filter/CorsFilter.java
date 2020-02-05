@@ -1,11 +1,10 @@
 package ops.gateway.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ops.gateway.model.response.ResponseConstant;
-import ops.gateway.model.response.ResponseDTO;
+import ops.gateway.model.response.common.ResponseConstant;
+import ops.gateway.model.response.CommonResponse;
 import ops.gateway.util.Constant;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -64,8 +63,8 @@ public class CorsFilter implements Filter {
 
     }
 
-    private byte[] restResponseBytes(ResponseDTO responseDto) throws IOException {
-        String serialized = new ObjectMapper().writeValueAsString(responseDto);
+    private byte[] restResponseBytes(CommonResponse commonResponse) throws IOException {
+        String serialized = new ObjectMapper().writeValueAsString(commonResponse);
         return serialized.getBytes();
     }
 

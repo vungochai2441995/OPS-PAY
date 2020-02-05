@@ -37,12 +37,12 @@ public class LogInterceptor {
             }
     }
 
-//    @AfterReturning(value = "ops.gateway.annotation.LogManager.auditLog()"
-//            + "&& target(bean) "
-//            + "&& @annotation(ops.gateway.annotation.Loggable)",
-//            returning = "result")
-//    public void resultLog(JoinPoint jp, Object bean, ResponseEntity result) throws Throwable {
-//        String resultEntity = new ObjectMapper().writeValueAsString(result);
-//        logger.info("Response object: \n" + resultEntity);
-//    }
+    @AfterReturning(value = "ops.gateway.annotation.LogManager.auditLog()"
+            + "&& target(bean) "
+            + "&& @annotation(ops.gateway.annotation.Loggable)",
+            returning = "result")
+    public void resultLog(JoinPoint jp, Object bean, ResponseEntity result) throws Throwable {
+        String resultEntity = new ObjectMapper().writeValueAsString(result);
+        logger.info("Response object: \n" + resultEntity);
+    }
 }

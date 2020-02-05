@@ -1,6 +1,37 @@
 package ops.gateway.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Constant {
+    public enum Status {
+        PENDING("PENDING"), APPROVED("APPROVED"), REJECTED("REJECTED");
+        private String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString(){
+            return this.value;
+        }
+    }
+
+    public enum Result {
+        PENDING("PENDING"), PROCESSING("PROCESSING"), SUCCESS("SUCCESS") , REJECTED("REJECTED");
+        private String value;
+
+        Result(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString(){
+            return this.value;
+        }
+    }
+
     public static class Logging {
         public static final String LOG_REQUEST_BY_CLASS_AND_METHOD = "Call method: %s | Request object: %s";
         public static final String LOG_RESPONSE_BY_CLASS_AND_METHOD = "Call method: %s | Response object: %s";
