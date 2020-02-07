@@ -45,6 +45,7 @@ public class Constant {
 
     public static class MessageApi {
         public static final String SUCCESS = "Thành công";
+        public static final String FAIL = "Không thành công";
         public static final String PAY_MAKER_CHECKER_FALSE = "Sai key connect tại pay-maker-checker";
         public static final String VALIDATE_NULL = "Không được null";
         public static final String VALIDATE_MAX_LENGTH_20 = "không được vượt quá 20 ký tự";

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ops.gateway.batis.RequestMasterMapper">
+
+    <select id="selectOne" resultType="RequestMaster" parameterType="java.lang.Long">
+        SELECT
+            ORIGINAL_TRANS_ID as originalTransId,
+            MAKER_REQUEST_ID as makerRequestId,
+            MAKER_ID as makerId,
+            MAKER_NAME as makerName,
+            MAKED_TIME as makedTime,
+            TRANSACTION_TYPE as transactionType,
+            ACTION_TYPE as actionType,
+            DATA as data,
+            CHECKER_ID as checkerId,
+            CHECKER_NAME as checkerName,
+            CHECKED_TIME as checkedTime,
+            STATUS as status,
+            RESULT as result,
+            RESPONSE_TIME as responseTime,
+            RESPONSE_TRANS_ID as responseTransId
+        FROM ops_pay_service.request_master
+        WHERE OBJECT_ID = #{value}
+    </select>
+
+</mapper>

@@ -24,13 +24,13 @@ public class RequestMaster {
     @Column(name = "OBJECT_ID", unique = true, nullable = false)
     private Long objectId;
 
-    @Column(name = "ORIGINAL_TRANS_ID", length = 100)
+    @Column(name = "ORIGINAL_TRANS_ID", length = 100,updatable = false)
     private String originalTransId;
 
-    @Column(name = "MAKER_REQUEST_ID", nullable = false, length = 100)
+    @Column(name = "MAKER_REQUEST_ID", nullable = false, length = 100,updatable = false)
     private String makerRequestId;
 
-    @Column(name = "MAKER_ID", nullable = false)
+    @Column(name = "MAKER_ID", nullable = false,updatable = false)
     private long makerId;
 
 
@@ -38,16 +38,16 @@ public class RequestMaster {
     private String makerName;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "MAKED_TIME", length = 19)
+    @Column(name = "MAKED_TIME", length = 19,updatable = false)
     private Date makedTime;
 
-    @Column(name = "TRANSACTION_TYPE", nullable = false, length = 50)
+    @Column(name = "TRANSACTION_TYPE", nullable = false, length = 50,updatable = false)
     private String transactionType;
 
-   @Column(name = "ACTION_TYPE", nullable = false, length = 50)
+    @Column(name = "ACTION_TYPE", nullable = false, length = 50,updatable = false)
     private String actionType;
 
-    @Column(name = "DATA", nullable = false, length = 65535)
+    @Column(name = "DATA", nullable = false, length = 65535,updatable = false)
     private String data;
 
     @Column(name = "CHECKER_ID")

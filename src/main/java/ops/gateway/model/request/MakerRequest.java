@@ -23,7 +23,7 @@ public class MakerRequest {
 
     private String desc;
 
-    private double amount;
+    private Integer amount;
 
     private String sessionId;
 

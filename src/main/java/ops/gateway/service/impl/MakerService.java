@@ -37,14 +37,11 @@ public class MakerService implements IMakerService {
                 RequestMaster requestMaster = MakerMapper.GateWayRequestToRequestMasterEntity(makerRequest);
                 try {
                     RequestMaster saveResult = makerRepository.save(requestMaster);
-
-
                     MakerSuccessDataDTO makerSuccessDataDTO = new MakerSuccessDataDTO(saveResult.getOriginalTransId(),
                             saveResult.getObjectId(), makerRequest.getDesc(),makerRequest.getAmount());
                     listSuccessRequest.add(makerSuccessDataDTO);
                 } catch (RuntimeException ex) {
                     listFailRequest.add(makerRequest.getOriginalTransId());
-                    continue;
                 }
             }
         }

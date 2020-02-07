@@ -66,6 +66,13 @@ public class OpsPayController {
         return ResponseEntity.status(HttpStatus.OK).body(eWalletServiceResponse.getBody());
     }
 
+    @Loggable
+    @PostMapping("/approved-data")
+    public ResponseEntity<?> approvedData(@RequestBody List<CheckerRequest> checkerRequestList) {
+        ResponseEntity<String> eWalletServiceResponse = iCheckerService.checker(checkerRequestList);
+        return ResponseEntity.status(HttpStatus.OK).body(eWalletServiceResponse.getBody());
+    }
+
     @GetMapping
     public ResponseEntity<?> test() {
         return ResponseEntity.status(HttpStatus.OK).body(iCheckerService.test());

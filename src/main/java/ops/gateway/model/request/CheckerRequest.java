@@ -9,5 +9,5 @@ public class CheckerRequest {
     private String desc;
     private String originalTransId;
     private Long userId;
-    private double amount;
+    private Integer amount;
 }
